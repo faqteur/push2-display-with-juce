@@ -85,7 +85,6 @@ private:
 private:
   ableton::Push2DisplayBridge bridge_;    /*!< The bridge allowing to use juce::graphics for push */
   ableton::Push2Display push2Display_;                  /*!< The low-level push2 class */
-  std::unique_ptr<MidiInput> midiInput_;  /*!< Push2's midi input */
   midicb_t midiCallback_;                 /*!> The midi callback to call when incoming messages are recieved */
   float elapsed_;                         /*!> Fake elapsed time used for the animation */
 };

@@ -75,14 +75,14 @@ namespace
     char ErrorMsg[256];
 
     // set message in case we get to the end of the list w/o finding a device
-    sprintf(ErrorMsg, "display device not found\n");
+    snprintf(ErrorMsg, 256, "display device not found\n");
 
     for (int i = 0; (device = devices[i]) != NULL; i++)
     {
       struct libusb_device_descriptor descriptor;
       if ((errorCode = libusb_get_device_descriptor(device, &descriptor)) < 0)
       {
-        sprintf(ErrorMsg, "could not get usb device descriptor, error: %d", errorCode);
+        snprintf(ErrorMsg, 256, "could not get usb device descriptor, error: %d", errorCode);
         continue;
       }
 
@@ -95,11 +95,11 @@ namespace
       {
         if ((errorCode = libusb_open(device, &device_handle)) < 0)
         {
-          sprintf(ErrorMsg, "could not open device, error: %d", errorCode);
+          snprintf(ErrorMsg, 256, "could not open device, error: %d", errorCode);
         }
         else if ((errorCode = libusb_claim_interface(device_handle, 0)) < 0)
         {
-          sprintf(ErrorMsg, "could not claim device with interface 0, error: %d", errorCode);
+          snprintf(ErrorMsg, 256, "could not claim device with interface 0, error: %d", errorCode);
           libusb_close(device_handle);
           device_handle = NULL;
         }

@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="khUpu8" name="juce2push2" projectType="guiapp" version="1.0.0"
               bundleIdentifier="com.ableton.juce2push2" includeBinaryInAppConfig="1"
-              jucerVersion="4.3.0" companyWebsite="www.ableton.com" companyName="ableton">
+              companyWebsite="www.ableton.com" companyName="ableton" jucerFormatVersion="1">
   <MAINGROUP id="zuLs1h" name="juce2push2">
     <GROUP id="{77D27162-EB4E-01CF-09C5-5827CB9ED5AD}" name="resources">
       <FILE id="BnMMBa" name="PushStartup.png" compile="0" resource="1" file="Resources/PushStartup.png"/>
@@ -37,12 +37,12 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="10.7 SDK" osxArchitecture="default"
-                       isDebug="1" optimisation="1" targetName="juce2push2" cppLanguageStandard="c++11"
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="10.13 SDK" isDebug="1"
+                       optimisation="1" targetName="juce2push2" cppLanguageStandard="c++11"
                        cppLibType="libc++" headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"/>
-        <CONFIGURATION name="Release" osxSDK="10.7 SDK" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="0" optimisation="3" targetName="juce2push2" cppLanguageStandard="c++11"
-                       cppLibType="libc++" headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"/>
+        <CONFIGURATION name="Release" osxCompatibility="default" isDebug="0" optimisation="3"
+                       targetName="juce2push2" cppLanguageStandard="c++11" cppLibType="libc++"
+                       headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="modules/JUCE/modules"/>
@@ -81,28 +81,6 @@
         <MODULEPATH id="juce_audio_utils" path="modules/JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
-    <VS2013 targetFolder="Builds/VisualStudio2013">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="1" optimisation="1" targetName="juce2push2" headerPath="../../source&#10;../../source/libusb&#10;../../modules/libusb/libusb&#10;"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
-                       isDebug="0" optimisation="3" targetName="juce2push2" headerPath="../../source&#10;../../source/libusb&#10;../../modules/libusb/libusb&#10;"/>
-      </CONFIGURATIONS>
-      <MODULEPATHS>
-        <MODULEPATH id="juce_gui_extra" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_graphics" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_events" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_data_structures" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_cryptography" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_core" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="modules/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="modules/JUCE/modules"/>
-      </MODULEPATHS>
-    </VS2013>
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>

@@ -23,24 +23,6 @@
 
 //------------------------------------------------------------------------------
 
-namespace
-{
-  bool SMatchSubStringNoCase(const std::string& haystack, const std::string& needle)
-  {
-    auto it = std::search(
-                          haystack.begin(), haystack.end(),
-                          needle.begin(), needle.end(),
-                          [](char ch1, char ch2)                // case insensitive
-                          {
-                            return std::toupper(ch1) == std::toupper(ch2);
-                          });
-    return it != haystack.end();
-  }
-}
-
-
-//------------------------------------------------------------------------------
-
 NBase::Result Demo::Init()
 {
   // First we initialise the low level push2 object
@@ -71,34 +53,30 @@ NBase::Result Demo::openMidiDevice()
 {
   // Look for an input device matching push 2
 
-  auto devices = MidiInput::getDevices();
-  int deviceIndex = -1;
-  int index = 0;
+  auto devices = MidiInput::getAvailableDevices();
+  String deviceIdentifier;
   for (auto& device: devices)
   {
-    if (SMatchSubStringNoCase(device.toStdString(), "ableton push 2"))
+    if (device.name.containsIgnoreCase("ableton push 2"))
     {
-      deviceIndex = index;
+        deviceIdentifier = device.identifier;
       break;
     }
-    index++;
   }
 
-  if (deviceIndex == -1)
+  if (deviceIdentifier.isEmpty())
   {
     return NBase::Result("Failed to find input midi device for push2");
   }
 
   // Try opening the device
-  auto input = MidiInput::openDevice(deviceIndex, this);
+  auto input = MidiInput::openDevice(deviceIdentifier, this);
   if (!input)
   {
     return NBase::Result("Failed to open input device");
   }
 
-  // Store and starts listening to the device
-  midiInput_.reset(input);
-  midiInput_->start();
+  input->start();
 
   return NBase::Result::NoError;
 }
