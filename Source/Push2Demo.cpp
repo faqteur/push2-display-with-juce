@@ -46,6 +46,13 @@ NBase::Result Demo::Init()
   return NBase::Result::NoError;
 }
 
+Demo::~Demo()
+{
+  if (pushId.isNotEmpty())
+  {
+    deviceManager.removeMidiInputDeviceCallback(pushId, this);
+  }
+}
 
 //------------------------------------------------------------------------------
 
@@ -54,29 +61,26 @@ NBase::Result Demo::openMidiDevice()
   // Look for an input device matching push 2
 
   auto devices = MidiInput::getAvailableDevices();
-  String deviceIdentifier;
   for (auto& device: devices)
   {
-    if (device.name.containsIgnoreCase("ableton push 2"))
+    if (device.name.containsIgnoreCase("Ableton Push 2 Live Port"))
     {
-        deviceIdentifier = device.identifier;
+        pushId = device.identifier;
       break;
     }
   }
 
-  if (deviceIdentifier.isEmpty())
+  if (pushId.isEmpty())
   {
     return NBase::Result("Failed to find input midi device for push2");
   }
 
-  // Try opening the device
-  auto input = MidiInput::openDevice(deviceIdentifier, this);
-  if (!input)
+  if (!deviceManager.isMidiInputDeviceEnabled(pushId))
   {
-    return NBase::Result("Failed to open input device");
+    deviceManager.setMidiInputDeviceEnabled(pushId, true);
   }
 
-  input->start();
+  deviceManager.addMidiInputDeviceCallback(pushId, this);
 
   return NBase::Result::NoError;
 }
@@ -92,7 +96,7 @@ void Demo::SetMidiInputCallback(const midicb_t& callback)
 
 //------------------------------------------------------------------------------
 
-void Demo::handleIncomingMidiMessage (MidiInput* /*source*/, const MidiMessage &message)
+void Demo::handleIncomingMidiMessage (MidiInput* source, const MidiMessage &message)
 {
   // if a callback has been set, forward the incoming message
   if (midiCallback_)

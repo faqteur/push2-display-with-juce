@@ -40,6 +40,8 @@ public:
    *  \return the result of the initialisation process
    */
 
+  ~Demo() override;
+
   NBase::Result Init();
 
 
@@ -87,4 +89,6 @@ private:
   ableton::Push2Display push2Display_;                  /*!< The low-level push2 class */
   midicb_t midiCallback_;                 /*!> The midi callback to call when incoming messages are recieved */
   float elapsed_;                         /*!> Fake elapsed time used for the animation */
+  AudioDeviceManager deviceManager;
+  String pushId;
 };

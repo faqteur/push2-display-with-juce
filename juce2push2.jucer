@@ -39,7 +39,8 @@
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="10.13 SDK" isDebug="1"
                        optimisation="1" targetName="juce2push2" cppLanguageStandard="c++11"
-                       cppLibType="libc++" headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"/>
+                       cppLibType="libc++" headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"
+                       macOSDeploymentTarget="10.13"/>
         <CONFIGURATION name="Release" osxCompatibility="default" isDebug="0" optimisation="3"
                        targetName="juce2push2" cppLanguageStandard="c++11" cppLibType="libc++"
                        headerPath="../../Source&#10;../../Source/libusb&#10;../../modules/libusb/libusb&#10;"/>
